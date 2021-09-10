@@ -32,17 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		  	.passwordEncoder(passwordEncoder()); 
 	  }
 	  
+	  /*
 	  @Bean 
 	  public PasswordEncoder passwordEncoder(){ 
 		  return NoOpPasswordEncoder.getInstance(); // esse não altera a senha. Irá usar a senha original do usuário.
 	  }
+	  */
 	  
-	  /*  
+	    
 	  @Bean
 	    public PasswordEncoder passwordEncoder(){
 	        return new BCryptPasswordEncoder();
 	    }
-	  */
 	   
 	 
 		/*

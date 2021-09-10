@@ -29,11 +29,11 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody @Valid Usuario usuario){
     	
-    	//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     	
         try{
-        	//String senhaCriptografada = passwordEncoder.encode(usuario.getPassword());
-            //usuario.setPassword(senhaCriptografada);
+        	String senhaCriptografada = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(senhaCriptografada);
             service.salvar(usuario);
         }catch (UsuarioCadastradoException e){
             throw new ResponseStatusException( HttpStatus.BAD_REQUEST, e.getMessage() );
