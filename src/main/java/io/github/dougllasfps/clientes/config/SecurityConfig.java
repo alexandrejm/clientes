@@ -25,11 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  @Autowired 
 	  private UsuarioService usuarioService;
 	  
+	  @Bean
+	  public PasswordEncoder passwordEncoder(){
+	      return new BCryptPasswordEncoder();
+	  }
+	  
 	  @Override 
 	  public void configure(AuthenticationManagerBuilder auth) throws Exception { 
 		  auth 
 		  	.userDetailsService(usuarioService)
-		  	.passwordEncoder(passwordEncoder()); 
+		  	.passwordEncoder(passwordEncoder());
 	  }
 	  
 	  /*
@@ -38,12 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		  return NoOpPasswordEncoder.getInstance(); // esse não altera a senha. Irá usar a senha original do usuário.
 	  }
 	  */
-	  
-	    
-	  @Bean
-	    public PasswordEncoder passwordEncoder(){
-	        return new BCryptPasswordEncoder();
-	    }
 	   
 	 
 		/*

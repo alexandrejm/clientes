@@ -23,18 +23,17 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioController {
 
     private final UsuarioService service;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody @Valid Usuario usuario){
     	
-    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    	
         try{
         	String senhaCriptografada = passwordEncoder.encode(usuario.getPassword());
             usuario.setPassword(senhaCriptografada);
             service.salvar(usuario);
+            System.out.println("Senha = " + senhaCriptografada);
         }catch (UsuarioCadastradoException e){
             throw new ResponseStatusException( HttpStatus.BAD_REQUEST, e.getMessage() );
         }
@@ -42,6 +41,7 @@ public class UsuarioController {
     
     /* Curso Spring Securit Especialista do Dougllas
     private final PasswordEncoder passwordEncoder;
+     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario salvar( @RequestBody @Valid Usuario usuario ){
